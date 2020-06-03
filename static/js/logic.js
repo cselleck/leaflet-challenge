@@ -59,17 +59,18 @@ function createMap(earthquakes) {
         id: 'mapbox.satellite',
         accessToken: API_KEY
     });
-    var grayscalemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>',
+    var grayscalemap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
         maxZoom: 13,
-        id: 'mapbox.light-v10',
+        id: 'dark-v10',
         accessToken: API_KEY
     });
 
-    var outdoorsmap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>',
+    var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+
         maxZoom: 13,
-        id: 'mapbox.outdoors',
+        id: 'streets-v9',
         accessToken: API_KEY
     });
 
@@ -78,8 +79,8 @@ function createMap(earthquakes) {
 
     // Define a baseMaps object to hold our base layers
     var baseMaps = {
-        "Outdoor Map": outdoorsmap,
-        "Greyscale Map": grayscalemap,
+        "Street Map": streetmap,
+        "Dark Map": grayscalemap,
         "Satellite Map": satellitemap
     };
 
@@ -95,7 +96,7 @@ function createMap(earthquakes) {
             37.09, -95.71
         ],
         zoom: 4,
-        layers: [outdoorsmap, earthquakes, faultLine]
+        layers: [streetmap, earthquakes, faultLine]
     });
 
     // Create a layer control
